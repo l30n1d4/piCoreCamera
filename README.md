@@ -6,20 +6,25 @@ Raspberry Pi + piCore + Camera
 - Raspberry Pi Camera Module
 
 ## Set up PiCore Linux
-download http://distro.ibiblio.org/tinycorelinux/9.x/armv6/releases/RPi/piCore-9.0.3.zip and flash
+download [piCore](http://distro.ibiblio.org/tinycorelinux/9.x/armv6/releases/RPi/piCore-9.0.3.zip) and flash
 
 ## Expand the /dev/mmcblk0p2 Partition
     $ sudo fdisk -u /dev/mmcblk0
 p
 > print partizioni
+
 d
 > delete partizione di tipo 2
+
 n
 > nuova partizione di tipo 2
+
 xxxxx
 > usare l'ultimo settore del primo blocco
+
 w
 > per scrivere
+
     $ sudo reboot
     $ sudo resize2fs /dev/mmcblk0p2
     $ df -h
@@ -45,6 +50,7 @@ w
     $ sudo mount /dev/mmcblk0p1 /mnt/mmcblk0p1
     $ sudo nano /mnt/mmcblk0p1/cmdline.txt
 add at the end `tz=CET-1CEST,M3.5.0,M10.5.0/3 cron`
+
     $ sudo echo "TZ=CET-1CEST,M3.5.0,M10.5.0/3" > /etc/sysconfig/timezone
     $ echo "etc/sysconfig/timezone" >> /opt/.filetool.lst
     $ sudo filetool.sh -b
@@ -56,6 +62,7 @@ add at the end `tz=CET-1CEST,M3.5.0,M10.5.0/3 cron`
     $ sudo reboot
     $ crontab -e
 add at the end `*/10 * * * * sh /home/tc/shot.sh`
+
     $ echo "var/spool/cron/crontabs" >> /opt/.filetool.lst
     $ sudo filetool.sh -b
 
@@ -71,8 +78,7 @@ edit username e password in `ftp-upload.sh` and `ftp-nas.sh`
 ## salvare tutte le configurazioni effettuate
     $ sudo filetool.sh -b
 
-
 ## Thank's to
-https://github.com/l30n1d4/treecam
+https://github.com/frederikheld/treecam
 https://www.novaspirit.com/2018/01/09/tiny-core-raspberry-pi-zero-w-install/
 https://www.youtube.com/watch?v=aKvW59uk4PY
